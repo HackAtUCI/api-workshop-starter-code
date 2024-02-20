@@ -3,6 +3,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
 }
 
 #center-cat {
@@ -15,7 +16,7 @@ body {
 }
 
 #center-cat>img {
-    max-height: 450px;
+    max-height: 40vh;
 
     margin-bottom: 1em;
 

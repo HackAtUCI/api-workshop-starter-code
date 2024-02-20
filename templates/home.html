@@ -8,9 +8,28 @@
 </head>
 <body>
     <div id="center-cat">
-        <img src= {{ img_url }} alt="random cat image"/>
+        <img id="cat-image" src={{ img_url }} alt="random cat image"/>
         <h1 id="name-header">{{ name }}</h1>
-        <h2>{{ description }}</h2>
+        <h2 id="description">{{ description }}</h2>
+        <button id="get-cat">ACQUIRE ANOTHER GATTO</button>
     </div>
+    <script>
+        function getCat() {
+            const cat_url = {{ url_for("acquire_cat")|tojson }};
+            fetch(cat_url)
+            .then(response => response.json())
+            .then((data) => {
+                let cat_img = document.getElementById("cat-image");
+                cat_img.setAttribute("src", data.img_url);
+
+                let name = document.getElementById("name-header");
+                name.innerHTML = data.name;
+
+                let desc = document.getElementById("description");
+                desc.innerHTML = data.description;
+            });
+        }
+        document.getElementById("get-cat").addEventListener("click", getCat);
+    </script>
 </body>
 </html>
