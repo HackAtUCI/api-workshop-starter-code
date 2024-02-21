@@ -13,22 +13,29 @@
         <h2 id="description">{{ description }}</h2>
         <button id="get-cat">ACQUIRE ANOTHER GATTO</button>
     </div>
+
     <script>
         function getCat() {
+            // the url_for function creates the url to the Flask endpoint
             const cat_url = {{ url_for("acquire_cat")|tojson }};
+
+            // Calls the Flask endpoint to return a json string
+            // Then sets the image, name, and description with that json
             fetch(cat_url)
             .then(response => response.json())
             .then((data) => {
                 let cat_img = document.getElementById("cat-image");
                 cat_img.setAttribute("src", data.img_url);
 
-                let name = document.getElementById("name-header");
-                name.innerHTML = data.name;
+                let nameHeader = document.getElementById("name-header");
+                nameHeader.innerHTML = data.name;
 
                 let desc = document.getElementById("description");
                 desc.innerHTML = data.description;
             });
         }
+
+        // bind the function to the get-cat button
         document.getElementById("get-cat").addEventListener("click", getCat);
     </script>
 </body>
